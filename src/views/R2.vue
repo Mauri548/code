@@ -4,12 +4,12 @@
         <thead>
             
             <tr>
-                <th>id <ion-icon name="swap-vertical-outline"></ion-icon> </th>
-                <th>Nombre <ion-icon name="swap-vertical-outline"></ion-icon> </th>
-                <th>telefono <ion-icon name="swap-vertical-outline"></ion-icon> </th>
-                <th>correo <ion-icon name="swap-vertical-outline"></ion-icon> </th>
-                <th>dni <ion-icon name="swap-vertical-outline"></ion-icon> </th>
-                <th>codigo <ion-icon name="swap-vertical-outline"></ion-icon> </th>
+                <th>id <ion-icon @click="ordenar('id')" name="swap-vertical-outline"></ion-icon> </th>
+                <th>Nombre <ion-icon @click="ordenar('nombre')" name="swap-vertical-outline"></ion-icon> </th>
+                <th>telefono <ion-icon @click="ordenar('telefono')" name="swap-vertical-outline"></ion-icon> </th>
+                <th>correo <ion-icon @click="ordenar('correo')" name="swap-vertical-outline"></ion-icon> </th>
+                <th>dni <ion-icon @click="ordenar('dni')" name="swap-vertical-outline"></ion-icon> </th>
+                <th>codigo <ion-icon @click="ordenar('codigo')" name="swap-vertical-outline"></ion-icon> </th>
             </tr>
         </thead>
         <tbody>
@@ -28,9 +28,10 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
     setup(){
-        const datos = [
+        const datos = ref([
             {id: '1', nombre:'Mauricio Ferreyra', telefono: 3624624287, correo: 'mauricioferreyra548@gmail.com', dni: 40912096, codigo: 135},
             {id: '2', nombre:'Jose Alberto', telefono: 3624231233, correo: 'alberto@gmail.com', dni: 3215485, codigo: 148},
             {id: '3', nombre:'Luis rizzoli', telefono: 3624213254, correo: 'luisRizzoli@gmail.com', dni: 40912097, codigo: 152},
@@ -40,10 +41,119 @@ export default {
             {id: '7', nombre:'Jhonatan Gonzales', telefono: 3624554854, correo: 'jony@gmail.com', dni: 42065123, codigo: 223},
             {id: '8', nombre:'Clara Valenzuela', telefono: 362445586, correo: 'clara@gmail.com', dni: 40912553, codigo: 302},
             {id: '9', nombre:'Jorge Rojas', telefono: 3624417414, correo: 'jorge@gmail.com', dni: 40915523, codigo: 350},
-        ]
+        ])
+
+        const orden = ref(false)
+
+        const ordenar = (tipo) => {
+            switch (tipo) {
+                case 'id':
+                    if (orden.value) {
+                        datos.value.sort((a,b) => {
+                            return parseInt(a.id) - parseInt(b.id)
+                        })
+                    } else {
+                        datos.value.sort((a,b) => {
+                            return parseInt(b.id) - parseInt(a.id)
+                        })
+                    }
+                    break;
+
+                case 'nombre': 
+                    if (orden.value) {
+                        datos.value.sort((a,b) => {
+                            if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) {
+                                return 1
+                            }
+                            if (a.nombre.toLowerCase() < b.nombre.toLowerCase() ) {
+                                return -1
+                            }
+                            return 0
+                        })
+                    } else {
+                        datos.value.sort((a,b) => {
+                            if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) {
+                                return 1
+                            }
+                            if (a.nombre.toLowerCase() > b.nombre.toLowerCase() ) {
+                                return -1
+                            }
+                            return 0
+                        })
+                    }
+                    break;
+
+                case 'telefono':
+                    if (orden.value) {
+                        datos.value.sort((a,b) => {
+                            return parseInt(a.telefono) - parseInt(b.telefono)
+                        })
+                    } else {
+                        datos.value.sort((a,b) => {
+                            return parseInt(b.telefono) - parseInt(a.telefono)
+                        })
+                    }
+                    break;
+
+                case 'correo':
+                     if (orden.value) {
+                        datos.value.sort((a,b) => {
+                            if (a.correo.toLowerCase() > b.correo.toLowerCase()) {
+                                return 1
+                            }
+                            if (a.correo.toLowerCase() < b.correo.toLowerCase()) {
+                                return -1
+                            }
+                            return 0
+                        })
+                    } else {
+                        datos.value.sort((a,b) => {
+                            if (a.correo.toLowerCase() < b.correo.toLowerCase()) {
+                                return 1
+                            }
+                            if (a.correo.toLowerCase() > b.correo.toLowerCase()) {
+                                return -1
+                            }
+                            return 0
+                        })
+                    }
+                    break;
+
+                case 'dni':
+                    if (orden.value) {
+                        datos.value.sort((a,b) => {
+                            return parseInt(a.dni) - parseInt(b.dni)
+                        })
+                    } else {
+                        datos.value.sort((a,b) => {
+                            return parseInt(b.dni) - parseInt(a.dni)
+                        })
+                    }
+                    break;
+
+                case 'codigo':
+                    if (orden.value) {
+                        datos.value.sort((a,b) => {
+                            return parseInt(a.codigo) - parseInt(b.codigo)
+                        })
+                    } else {
+                        datos.value.sort((a,b) => {
+                            return parseInt(b.codigo) - parseInt(a.codigo)
+                        })
+                    }
+                    break;
+
+            }
+            
+            orden.value = !orden.value
+            
+
+            console.log(datos.value)
+        }
 
         return{
-            datos
+            datos,
+            ordenar
         }
     }
 }
