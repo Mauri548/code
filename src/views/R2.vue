@@ -1,18 +1,49 @@
 <template>
-  <div>
+  <div class="container">
       <table class="table">
+        <!-- Encabezado -->
         <thead>
-            
             <tr>
-                <th>id <ion-icon @click="ordenar('id')" name="swap-vertical-outline"></ion-icon> </th>
-                <th>Nombre <ion-icon @click="ordenar('nombre')" name="swap-vertical-outline"></ion-icon> </th>
-                <th>telefono <ion-icon @click="ordenar('telefono')" name="swap-vertical-outline"></ion-icon> </th>
-                <th>correo <ion-icon @click="ordenar('correo')" name="swap-vertical-outline"></ion-icon> </th>
-                <th>dni <ion-icon @click="ordenar('dni')" name="swap-vertical-outline"></ion-icon> </th>
-                <th>codigo <ion-icon @click="ordenar('codigo')" name="swap-vertical-outline"></ion-icon> </th>
+                <th>
+                    <div>
+                        <p>Id</p>
+                        <ion-icon @click="ordenar('id')" name="swap-vertical-outline"></ion-icon>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <p>Nombre</p>
+                        <ion-icon @click="ordenar('nombre')" name="swap-vertical-outline"></ion-icon>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <p>Telefono</p>
+                        <ion-icon @click="ordenar('telefono')" name="swap-vertical-outline"></ion-icon>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <p>Correo</p>
+                        <ion-icon @click="ordenar('correo')" name="swap-vertical-outline"></ion-icon>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <p>Dni</p>
+                        <ion-icon @click="ordenar('dni')" name="swap-vertical-outline"></ion-icon>
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        <p>Codigo</p>
+                        <ion-icon @click="ordenar('codigo')" name="swap-vertical-outline"></ion-icon>
+                    </div>
+                </th>
             </tr>
         </thead>
         <tbody>
+            <!-- Cuerpo de la tabla -->
             <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
                 <td>{{dato.id}}</td>
                 <td>{{dato.nombre}}</td>
@@ -30,6 +61,7 @@
 <script>
 import { ref } from 'vue'
 export default {
+
     setup(){
         const datos = ref([
             {id: '1', nombre:'Mauricio Ferreyra', telefono: 3624624287, correo: 'mauricioferreyra548@gmail.com', dni: 40912096, codigo: 135},
@@ -39,12 +71,14 @@ export default {
             {id: '5', nombre:'Marcos Barrios', telefono: 3624858578, correo: 'barrios@gmail.com', dni: 40656585, codigo: 251},
             {id: '6', nombre:'Lucia Ramirez', telefono: 3624112254, correo: 'ramirez@gmail.com', dni: 40912052, codigo: 235},
             {id: '7', nombre:'Jhonatan Gonzales', telefono: 3624554854, correo: 'jony@gmail.com', dni: 42065123, codigo: 223},
-            {id: '8', nombre:'Clara Valenzuela', telefono: 362445586, correo: 'clara@gmail.com', dni: 40912553, codigo: 302},
+            {id: '8', nombre:'Clara Valenzuela', telefono: 3624455816, correo: 'clara@gmail.com', dni: 40912553, codigo: 302},
             {id: '9', nombre:'Jorge Rojas', telefono: 3624417414, correo: 'jorge@gmail.com', dni: 40915523, codigo: 350},
         ])
 
-        const orden = ref(false)
+        // variable para cambiar el orden de la tabla
+        const orden = ref(false) 
 
+        // Recibe un valor por parametro para saber por que elemento del arreglo de objeto vamos a ordenar
         const ordenar = (tipo) => {
             switch (tipo) {
                 case 'id':
@@ -146,9 +180,6 @@ export default {
             }
             
             orden.value = !orden.value
-            
-
-            console.log(datos.value)
         }
 
         return{
@@ -160,6 +191,17 @@ export default {
 </script>
 
 <style scoped>
+.container{
+  width: 80%;
+  margin: auto;
+}
+
+@media (max-width: 768px) {
+  .container{
+    width: 95%;
+  }
+}
+
 .table {
     width: 100%;
     border-spacing: unset;
@@ -169,24 +211,26 @@ export default {
 .table tr th {
     width: 150px;
     border: 1px solid #808080;
+    padding: 0px 10px;
     text-align: start;
 }
 
-/* .table th {
+.table th div{
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-} */
-
-/* .row {
-} */
+    align-items: center;
+}
 
 .row2{
     background-color: #dedede;
 }
 
-th, td {
+td {
     padding: 10px;
     border: 1px solid #808080;
+}
+
+ion-icon {
+    cursor: pointer;
 }
 </style>
