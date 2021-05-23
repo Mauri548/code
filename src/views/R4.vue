@@ -6,51 +6,52 @@
             <tr>
                 <th>
                     <div>
-                        <p>Id</p>
-                        <ion-icon @click="ordenar('id')" name="swap-vertical-outline"></ion-icon>
+                        <p>Country</p>
+                        <ion-icon name="swap-vertical-outline"></ion-icon>
                     </div>
                 </th>
                 <th>
                     <div>
-                        <p>Nombre</p>
-                        <ion-icon @click="ordenar('nombre')" name="swap-vertical-outline"></ion-icon>
+                        <p>Name</p>
+                        <ion-icon name="swap-vertical-outline"></ion-icon>
                     </div>
                 </th>
                 <th>
                     <div>
-                        <p>Telefono</p>
-                        <ion-icon @click="ordenar('telefono')" name="swap-vertical-outline"></ion-icon>
+                        <p>Region</p>
+                        <ion-icon name="swap-vertical-outline"></ion-icon>
                     </div>
                 </th>
                 <th>
                     <div>
-                        <p>Correo</p>
-                        <ion-icon @click="ordenar('correo')" name="swap-vertical-outline"></ion-icon>
+                        <p>temperature</p>
+                        <ion-icon name="swap-vertical-outline"></ion-icon>
                     </div>
                 </th>
                 <th>
                     <div>
-                        <p>Dni</p>
-                        <ion-icon @click="ordenar('dni')" name="swap-vertical-outline"></ion-icon>
+                        <p>Wind speed</p>
+                        <ion-icon name="swap-vertical-outline"></ion-icon>
                     </div>
                 </th>
                 <th>
                     <div>
-                        <p>Codigo</p>
-                        <ion-icon @click="ordenar('codigo')" name="swap-vertical-outline"></ion-icon>
+                        <p>Wind direction</p>
+                        <ion-icon name="swap-vertical-outline"></ion-icon>
                     </div>
                 </th>
             </tr>
         </thead>
         <tbody>
             <!-- Cuerpo de la tabla -->
-            <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
-                <td>{{dato.id}}</td>
-                <td>{{dato.nombre}}</td>
-                <td>{{dato.telefono}}</td>
-                <td>{{dato.correo}}</td>
-                <td>{{dato.dni}}</td>
-                <td>{{dato.codigo}}</td>
+            <!-- <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}"> -->
+            <tr>
+                <td>{{datos.location.country}}</td>
+                <td>{{datos.location.name}}</td>
+                <td>{{datos.location.region}}</td>
+                <td>{{datos.current.temperature}}</td>
+                <td>{{datos.current.wind_speed}}</td>
+                <td>{{datos.current.wind_dir}}</td>
             </tr>
         </tbody>
           
@@ -59,134 +60,53 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onMounted, ref} from 'vue'
+import axios from 'axios'
 export default {
 
     setup(){
-        const datos = ref([
-            {id: '1', nombre:'Mauricio Ferreyra', telefono: 3624624287, correo: 'mauricioferreyra548@gmail.com', dni: 40912096, codigo: 135},
-            {id: '2', nombre:'Jose Alberto', telefono: 3624231233, correo: 'alberto@gmail.com', dni: 3215485, codigo: 148},
-            {id: '3', nombre:'Luis rizzoli', telefono: 3624213254, correo: 'luisRizzoli@gmail.com', dni: 40912097, codigo: 152},
-            {id: '4', nombre:'Emanuel Fleitas', telefono: 3624132548, correo: 'emanuelFleitas@gmail.com', dni: 45321254, codigo: 187},
-            {id: '5', nombre:'Marcos Barrios', telefono: 3624858578, correo: 'barrios@gmail.com', dni: 40656585, codigo: 251},
-            {id: '6', nombre:'Lucia Ramirez', telefono: 3624112254, correo: 'ramirez@gmail.com', dni: 40912052, codigo: 235},
-            {id: '7', nombre:'Jhonatan Gonzales', telefono: 3624554854, correo: 'jony@gmail.com', dni: 42065123, codigo: 223},
-            {id: '8', nombre:'Clara Valenzuela', telefono: 3624455816, correo: 'clara@gmail.com', dni: 40912553, codigo: 302},
-            {id: '9', nombre:'Jorge Rojas', telefono: 3624417414, correo: 'jorge@gmail.com', dni: 40915523, codigo: 350},
-        ])
+        onMounted(() => {
+            getApi(params)
+            // getApi(params2)
+            // getApi(params3)
 
-        // variable para cambiar el orden de la tabla
-        const orden = ref(false) 
+        })
 
-        // Recibe un valor por parametro para saber por que elemento del arreglo de objeto vamos a ordenar
-        const ordenar = (tipo) => {
-            switch (tipo) {
-                case 'id':
-                    if (orden.value) {
-                        datos.value.sort((a,b) => {
-                            return parseInt(a.id) - parseInt(b.id)
-                        })
-                    } else {
-                        datos.value.sort((a,b) => {
-                            return parseInt(b.id) - parseInt(a.id)
-                        })
-                    }
-                    break;
+        const datos = ref({
+            location:{ country: '', name: '', region: ''},
+            current:{temperatura: '', wind_speed: '', wind_dir: ''}
+        })
 
-                case 'nombre': 
-                    if (orden.value) {
-                        datos.value.sort((a,b) => {
-                            if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) {
-                                return 1
-                            }
-                            if (a.nombre.toLowerCase() < b.nombre.toLowerCase() ) {
-                                return -1
-                            }
-                            return 0
-                        })
-                    } else {
-                        datos.value.sort((a,b) => {
-                            if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) {
-                                return 1
-                            }
-                            if (a.nombre.toLowerCase() > b.nombre.toLowerCase() ) {
-                                return -1
-                            }
-                            return 0
-                        })
-                    }
-                    break;
+        const params = {
+            access_key : '2d532daf05fa6a53f6c3c5906b37ceec',
+            query : 'london',
+        }
+        // const params2 = {
+        //     access_key : '2d532daf05fa6a53f6c3c5906b37ceec',
+        //     query : 'Argentina',
+        // }
+        // const params3 = {
+        //     access_key : '2d532daf05fa6a53f6c3c5906b37ceec',
+        //     query : 'New York',
+        // }  
 
-                case 'telefono':
-                    if (orden.value) {
-                        datos.value.sort((a,b) => {
-                            return parseInt(a.telefono) - parseInt(b.telefono)
-                        })
-                    } else {
-                        datos.value.sort((a,b) => {
-                            return parseInt(b.telefono) - parseInt(a.telefono)
-                        })
-                    }
-                    break;
-
-                case 'correo':
-                     if (orden.value) {
-                        datos.value.sort((a,b) => {
-                            if (a.correo.toLowerCase() > b.correo.toLowerCase()) {
-                                return 1
-                            }
-                            if (a.correo.toLowerCase() < b.correo.toLowerCase()) {
-                                return -1
-                            }
-                            return 0
-                        })
-                    } else {
-                        datos.value.sort((a,b) => {
-                            if (a.correo.toLowerCase() < b.correo.toLowerCase()) {
-                                return 1
-                            }
-                            if (a.correo.toLowerCase() > b.correo.toLowerCase()) {
-                                return -1
-                            }
-                            return 0
-                        })
-                    }
-                    break;
-
-                case 'dni':
-                    if (orden.value) {
-                        datos.value.sort((a,b) => {
-                            return parseInt(a.dni) - parseInt(b.dni)
-                        })
-                    } else {
-                        datos.value.sort((a,b) => {
-                            return parseInt(b.dni) - parseInt(a.dni)
-                        })
-                    }
-                    break;
-
-                case 'codigo':
-                    if (orden.value) {
-                        datos.value.sort((a,b) => {
-                            return parseInt(a.codigo) - parseInt(b.codigo)
-                        })
-                    } else {
-                        datos.value.sort((a,b) => {
-                            return parseInt(b.codigo) - parseInt(a.codigo)
-                        })
-                    }
-                    break;
-
-            }
-            
-            orden.value = !orden.value
+        const getApi = (params) => {
+            axios.get(`http://api.weatherstack.com/current`,{params})
+                .then( response => {
+                    console.log(response)
+                    datos.value = response.data
+                    console.log(datos.value)
+                })
+                .catch(error => {
+                    console.log(error)
+                })   
         }
 
         return{
-            datos,
-            ordenar
+            datos
         }
-    }
+    },
+
 }
 </script>
 
