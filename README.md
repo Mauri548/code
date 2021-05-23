@@ -8,7 +8,6 @@ la llamada de una función para traer 3 valores diferentes.
 
 Dado que el proyecto fue creado con Vue 3 se creo una vista principal con 3 tarjeta
 cada una de estar tarjetas lo llevara a cada una de las soluciones
-
 ```
 
 ## Instalar Vue Cli
