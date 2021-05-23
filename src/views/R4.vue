@@ -1,59 +1,59 @@
 <template>
-  <div class="container">
-      <table class="table">
-        <!-- Encabezado -->
-        <thead>
-            <tr>
-                <th>
-                    <div>
-                        <p>Country</p>
-                        <ion-icon name="swap-vertical-outline"></ion-icon>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <p>Name</p>
-                        <ion-icon name="swap-vertical-outline"></ion-icon>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <p>Region</p>
-                        <ion-icon name="swap-vertical-outline"></ion-icon>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <p>temperature</p>
-                        <ion-icon name="swap-vertical-outline"></ion-icon>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <p>Wind speed</p>
-                        <ion-icon name="swap-vertical-outline"></ion-icon>
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        <p>Wind direction</p>
-                        <ion-icon name="swap-vertical-outline"></ion-icon>
-                    </div>
-                </th>
-            </tr>
-        </thead>
+    <div class="container">
+        <table class="table">
+            <!-- Encabezado -->
+            <thead>
+                <tr>
+                    <th>
+                        <div>
+                            <p>Country</p>
+                            <ion-icon name="swap-vertical-outline"></ion-icon>
+                        </div>
+                    </th>
+                    <th>
+                        <div>
+                            <p>Name</p>
+                            <ion-icon name="swap-vertical-outline"></ion-icon>
+                        </div>
+                    </th>
+                    <th>
+                        <div>
+                            <p>Region</p>
+                            <ion-icon name="swap-vertical-outline"></ion-icon>
+                        </div>
+                    </th>
+                    <th>
+                        <div>
+                            <p>temperature</p>
+                            <ion-icon name="swap-vertical-outline"></ion-icon>
+                        </div>
+                    </th>
+                    <th>
+                        <div>
+                            <p>Wind speed</p>
+                            <ion-icon name="swap-vertical-outline"></ion-icon>
+                        </div>
+                    </th>
+                    <th>
+                        <div>
+                            <p>Wind direction</p>
+                            <ion-icon name="swap-vertical-outline"></ion-icon>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
 
-        <!-- Cuerpo de la tabla -->
-        <tbody>
-            <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
-                <td>{{dato.location.country}}</td>
-                <td>{{dato.location.name}}</td>
-                <td>{{dato.location.region}}</td>
-                <td>{{dato.current.temperature}}</td>
-                <td>{{dato.current.wind_speed}}</td>
-                <td>{{dato.current.wind_dir}}</td>
-            </tr>
-        </tbody>
+            <!-- Cuerpo de la tabla -->
+            <tbody>
+                <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
+                    <td>{{dato.location.country}}</td>
+                    <td>{{dato.location.name}}</td>
+                    <td>{{dato.location.region}}</td>
+                    <td>{{dato.current.temperature}}</td>
+                    <td>{{dato.current.wind_speed}}</td>
+                    <td>{{dato.current.wind_dir}}</td>
+                </tr>
+            </tbody>
           
       </table>
   </div>
@@ -116,10 +116,10 @@ export default {
 
 <style scoped>
 .container{
-  width: 80%;
-  margin: auto;
-  margin-top: 25px;
-
+    width: 80%;
+    margin: auto;
+    margin-top: 25px;
+    overflow-x: scroll;
 }
 
 .table {

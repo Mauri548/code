@@ -197,6 +197,7 @@ export default {
   width: 80%;
   margin: auto;
   margin-top: 25px;
+  overflow-x: scroll;
 }
 
 .table {
