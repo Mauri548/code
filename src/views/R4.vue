@@ -4,48 +4,20 @@
             <!-- Encabezado -->
             <thead>
                 <tr>
-                    <th>
-                        <div>
-                            <p>Country</p>
-                            <ion-icon name="swap-vertical-outline"></ion-icon>
-                        </div>
-                    </th>
-                    <th>
-                        <div>
-                            <p>Name</p>
-                            <ion-icon name="swap-vertical-outline"></ion-icon>
-                        </div>
-                    </th>
-                    <th>
-                        <div>
-                            <p>Region</p>
-                            <ion-icon name="swap-vertical-outline"></ion-icon>
-                        </div>
-                    </th>
-                    <th>
-                        <div>
-                            <p>temperature</p>
-                            <ion-icon name="swap-vertical-outline"></ion-icon>
-                        </div>
-                    </th>
-                    <th>
-                        <div>
-                            <p>Wind speed</p>
-                            <ion-icon name="swap-vertical-outline"></ion-icon>
-                        </div>
-                    </th>
-                    <th>
-                        <div>
-                            <p>Wind direction</p>
-                            <ion-icon name="swap-vertical-outline"></ion-icon>
-                        </div>
-                    </th>
+                    <!-- Componente creado con su estilo css, se encuentra en src/components/thTitle.vue -->
+                    <ThTitle :title="'Country'" />
+                    <ThTitle :title="'Name'" />
+                    <ThTitle :title="'Region'" />
+                    <ThTitle :title="'Temperature'" />
+                    <ThTitle :title="'Wind speed'" />
+                    <ThTitle :title="'Wind direction'" />
+
                 </tr>
             </thead>
 
             <!-- Cuerpo de la tabla -->
             <tbody>
-                <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
+                <tr v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
                     <td>{{dato.location.country}}</td>
                     <td>{{dato.location.name}}</td>
                     <td>{{dato.location.region}}</td>
@@ -60,9 +32,13 @@
 </template>
 
 <script>
+import ThTitle from '../components/thTitle.vue'
 import { onMounted, ref} from 'vue'
 import axios from 'axios'
 export default {
+    components: {
+        ThTitle
+    },
 
     setup(){
         // Se consumira 3 veces la api por el hecho de que para hacer una consulta multipla hay que pagar
@@ -125,20 +101,6 @@ export default {
 .table {
     width: 100%;
     border-spacing: unset;
-    border: 1px solid #808080;
-}
-
-.table tr th {
-    width: 150px;
-    border: 1px solid #808080;
-    padding: 0px 10px;
-    text-align: start;
-}
-
-.table th div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .row2{
@@ -147,7 +109,14 @@ export default {
 
 td {
     padding: 10px;
+}
+
+.table, td {
     border: 1px solid #808080;
+}
+
+ion-icon {
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
@@ -155,7 +124,5 @@ td {
     width: 95%;
   }
 }
-ion-icon {
-    cursor: pointer;
-}
+
 </style>

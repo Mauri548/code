@@ -45,7 +45,7 @@
 
         <!-- Cuerpo de la tabla -->
         <tbody>
-            <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
+            <tr v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
                 <td>{{dato.id}}</td>
                 <td>{{dato.nombre}}</td>
                 <td>{{dato.telefono}}</td>
@@ -194,21 +194,19 @@ export default {
 
 <style scoped>
 .container{
-  width: 80%;
-  margin: auto;
-  margin-top: 25px;
-  overflow-x: scroll;
+    width: 80%;
+    margin: auto;
+    margin-top: 25px;
+    overflow-x: scroll;
 }
 
 .table {
     width: 100%;
     border-spacing: unset;
-    border: 1px solid #808080;
 }
 
 .table tr th {
     width: 150px;
-    border: 1px solid #808080;
     padding: 0px 10px;
     text-align: start;
 }
@@ -225,6 +223,9 @@ export default {
 
 td {
     padding: 10px;
+}
+
+.table, table tr th, td {
     border: 1px solid #808080;
 }
 
