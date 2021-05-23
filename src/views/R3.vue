@@ -51,12 +51,14 @@ ion-icon:hover{
     color: rgba(173,173,173,0.67);
 }
 
+/* ****************************************************** */
 /* Css de contenedores */
 .container{
     display: flex;
     align-items: center;
     width: 90%;
     margin: auto;
+    margin-top: 25px;
 }
 
 .container_text {
@@ -75,6 +77,7 @@ p {
     color: #4e4e4e;
 }
 
+/* ******************************************************** */
 /* Css De ventana modal */
 .modal {
     position:fixed;
@@ -109,6 +112,7 @@ p {
     margin: 0;
 }
 
+/* Boton close de modal */
 .close {
     background-color: #606061;
     color: #fff;
@@ -122,7 +126,10 @@ p {
 	font-weight: bold;
 	border-radius: 10px;
 	box-shadow: 1px 1px 3px #000;
+    z-index: 1;
 }
+
+/* ************************************************************* */
 
 /* Resolución de tablet 768px */
 @media (max-width:768px){
@@ -141,6 +148,11 @@ p {
 
     .container_img img{
         width: 100%;
+    }
+
+    .modal div {
+        width: 100%;
+        padding: 0;
     }
 }
 </style>

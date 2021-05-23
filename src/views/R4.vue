@@ -42,16 +42,16 @@
                 </th>
             </tr>
         </thead>
+
+        <!-- Cuerpo de la tabla -->
         <tbody>
-            <!-- Cuerpo de la tabla -->
-            <!-- <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}"> -->
-            <tr>
-                <td>{{datos.location.country}}</td>
-                <td>{{datos.location.name}}</td>
-                <td>{{datos.location.region}}</td>
-                <td>{{datos.current.temperature}}</td>
-                <td>{{datos.current.wind_speed}}</td>
-                <td>{{datos.current.wind_dir}}</td>
+            <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
+                <td>{{dato.location.country}}</td>
+                <td>{{dato.location.name}}</td>
+                <td>{{dato.location.region}}</td>
+                <td>{{dato.current.temperature}}</td>
+                <td>{{dato.current.wind_speed}}</td>
+                <td>{{dato.current.wind_dir}}</td>
             </tr>
         </tbody>
           
@@ -65,36 +65,40 @@ import axios from 'axios'
 export default {
 
     setup(){
+        // Se consumira 3 veces la api por el hecho de que para hacer una consulta multipla hay que pagar
         onMounted(() => {
+            datos.value = []
             getApi(params)
-            // getApi(params2)
-            // getApi(params3)
+            getApi(params2)
+            getApi(params3)
 
         })
 
-        const datos = ref({
+        // Variable que contendra un arreglo de objeto recibido por la Api
+        const datos = ref([{
             location:{ country: '', name: '', region: ''},
             current:{temperatura: '', wind_speed: '', wind_dir: ''}
-        })
+        }])
 
         const params = {
             access_key : '2d532daf05fa6a53f6c3c5906b37ceec',
             query : 'london',
         }
-        // const params2 = {
-        //     access_key : '2d532daf05fa6a53f6c3c5906b37ceec',
-        //     query : 'Argentina',
-        // }
-        // const params3 = {
-        //     access_key : '2d532daf05fa6a53f6c3c5906b37ceec',
-        //     query : 'New York',
-        // }  
+        const params2 = {
+            access_key : '2d532daf05fa6a53f6c3c5906b37ceec',
+            query : 'Argentina',
+        }
+        const params3 = {
+            access_key : '2d532daf05fa6a53f6c3c5906b37ceec',
+            query : 'New York',
+        }  
 
+        // Funcion para consultar la Api que recibe por parametro el acces_key y la query que se realizara
         const getApi = (params) => {
             axios.get(`http://api.weatherstack.com/current`,{params})
                 .then( response => {
                     console.log(response)
-                    datos.value = response.data
+                    datos.value.push(response.data)
                     console.log(datos.value)
                 })
                 .catch(error => {
@@ -114,12 +118,8 @@ export default {
 .container{
   width: 80%;
   margin: auto;
-}
+  margin-top: 25px;
 
-@media (max-width: 768px) {
-  .container{
-    width: 95%;
-  }
 }
 
 .table {
@@ -150,6 +150,11 @@ td {
     border: 1px solid #808080;
 }
 
+@media (max-width: 768px) {
+  .container{
+    width: 95%;
+  }
+}
 ion-icon {
     cursor: pointer;
 }

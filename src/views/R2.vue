@@ -42,8 +42,9 @@
                 </th>
             </tr>
         </thead>
+
+        <!-- Cuerpo de la tabla -->
         <tbody>
-            <!-- Cuerpo de la tabla -->
             <tr class="row" v-for="(dato,index) in datos" :key="dato.id" :index="index" :class="{'row2': index%2==0}">
                 <td>{{dato.id}}</td>
                 <td>{{dato.nombre}}</td>
@@ -78,7 +79,8 @@ export default {
         // variable para cambiar el orden de la tabla
         const orden = ref(false) 
 
-        // Recibe un valor por parametro para saber por que elemento del arreglo de objeto vamos a ordenar
+        // Funcion de ordenamiento por columna
+        // Recibe un valor por parametro para saber por que elemento del arreglo del objeto vamos a ordenar
         const ordenar = (tipo) => {
             switch (tipo) {
                 case 'id':
@@ -194,12 +196,7 @@ export default {
 .container{
   width: 80%;
   margin: auto;
-}
-
-@media (max-width: 768px) {
-  .container{
-    width: 95%;
-  }
+  margin-top: 25px;
 }
 
 .table {
@@ -232,5 +229,11 @@ td {
 
 ion-icon {
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container{
+    width: 95%;
+  }
 }
 </style>
