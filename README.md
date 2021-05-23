@@ -2,6 +2,10 @@
 
 ## Project setup
 ```
+npm install -g @vue/cli
+# OR
+yarn global add @vue/cli
+
 npm install
 ```
 
