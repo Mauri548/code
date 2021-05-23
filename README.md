@@ -1,11 +1,14 @@
 # code
 
-## Project setup
+## Instalar Vue Cli
 ```
 npm install -g @vue/cli
 # OR
 yarn global add @vue/cli
+```
 
+## Project setup
+```
 npm install
 ```
 
