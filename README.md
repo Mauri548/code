@@ -2,7 +2,9 @@
 
 ## Nota
 ```
-El consumo de la Api solo se puede hacer una consulta por función, en el caso de que se quiera realizar multiples consultas habría que pagar una suscripción, por lo tanto se creo varias variales y se repite la llamada de una función para traer 3 valores diferentes.
+El consumo de la Api solo se puede hacer una consulta por función, en el caso de que se quiera realizar
+multiples consultas habría que pagar una suscripción, por lo tanto se creo varias variales y se repite 
+la llamada de una función para traer 3 valores diferentes.
 
 ```
 
